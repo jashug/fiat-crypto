@@ -12,7 +12,9 @@ Require Import Crypto.Util.Decidable.
 
 Local Open Scope list_scope.
 
-Inductive symbolic_expr {base_type_code op_code} : Type :=
+Section symbolic_expr_section.
+Context {base_type_code op_code : Type}.
+Inductive symbolic_expr : Type :=
 | STT
 | SVar  (n : nat)
 | SOp   (argT : flat_type base_type_code) (op : op_code) (args : symbolic_expr)
@@ -20,6 +22,7 @@ Inductive symbolic_expr {base_type_code op_code} : Type :=
 | SFst  (A B : flat_type base_type_code) (x : symbolic_expr)
 | SSnd  (A B : flat_type base_type_code) (x : symbolic_expr)
 | SInvalid.
+End symbolic_expr_section.
 Scheme Equality for symbolic_expr.
 
 Arguments symbolic_expr : clear implicits.

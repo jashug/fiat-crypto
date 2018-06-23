@@ -2322,13 +2322,16 @@ Module Compilers.
 
   Module Uncurried.
     Module expr.
-      Inductive expr {ident : type -> type -> Type} {var : type -> Type} : type -> Type :=
+      Section expr_section.
+      Context {ident : type -> type -> Type} {var : type -> Type}.
+      Inductive expr : type -> Type :=
       | Var {t} (v : var t) : expr t
       | TT : expr type.unit
       | AppIdent {s d} (idc : ident s d) (args : expr s) : expr d
       | App {s d} (f : expr (s -> d)) (x : expr s) : expr d
       | Pair {A B} (a : expr A) (b : expr B) : expr (A * B)
       | Abs {s d} (f : var s -> expr d) : expr (s -> d).
+      End expr_section.
 
       Definition Expr {ident : type -> type -> Type} t := forall var, @expr ident var t.
 
@@ -2424,7 +2427,7 @@ Module Compilers.
       Module var_context.
         Inductive list {var : type -> Type} :=
         | nil
-        | cons {t} (gallina_v : type.interp t) (v : var t) (ctx : list).
+        | cons {t} (gallina_v : type.interp t) (v : var t) (ctx : list (var := var)).
       End var_context.
 
       (* cf COQBUG(https://github.com/coq/coq/issues/5448) , COQBUG(https://github.com/coq/coq/issues/6315) , COQBUG(https://github.com/coq/coq/issues/6559) , COQBUG(https://github.com/coq/coq/issues/6534) , https://github.com/mit-plv/fiat-crypto/issues/320 *)

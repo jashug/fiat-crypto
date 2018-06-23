@@ -51,7 +51,7 @@ Module Compilers.
     Inductive pattern {ident : Type} :=
     | Wildcard (t : type)
     | Ident (idc : ident)
-    | App (f x : pattern).
+    | App (f x : pattern (ident := ident)).
 
     Global Arguments Wildcard {ident%type} t%ptype.
 

@@ -424,7 +424,7 @@ Module Compilers.
     Module var_context.
       Inductive list {base_type} {var : type base_type -> Type} :=
       | nil
-      | cons {T t} (gallina_v : T) (v : var t) (ctx : list).
+      | cons {T t} (gallina_v : T) (v : var t) (ctx : list (var := var)).
     End var_context.
 
     (* cf COQBUG(https://github.com/coq/coq/issues/5448) , COQBUG(https://github.com/coq/coq/issues/6315) , COQBUG(https://github.com/coq/coq/issues/6559) , COQBUG(https://github.com/coq/coq/issues/6534) , https://github.com/mit-plv/fiat-crypto/issues/320 *)

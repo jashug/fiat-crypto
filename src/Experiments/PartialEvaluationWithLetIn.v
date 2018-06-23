@@ -245,7 +245,7 @@ Module UnderLets.
 
     Inductive UnderLets {T : Type} :=
     | Base (v : T)
-    | UnderLet {A} (x : expr A) (f : var A -> UnderLets).
+    | UnderLet {A} (x : expr A) (f : var A -> UnderLets (T := T)).
 
     Fixpoint splice {A B} (x : @UnderLets A) (e : A -> @UnderLets B) : @UnderLets B
       := match x with
